@@ -10,13 +10,21 @@ use App\Http\Controllers\ArtisanCommandController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [BookingController::class, 'welcomePage']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard/dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+
+    //Artisan Commands for help in Cpanel
+    
+    Route::get('/artisan-commands', [ArtisanCommandController::class, 'index'])->name('artisan.index');
+    Route::post('/artisan-commands/run', [ArtisanCommandController::class, 'run'])->name('artisan.run');
+        
+    Route::get('/', [BookingController::class, 'welcomePage']);
+
+    Route::get('/dashboard', function () {
+        return view('dashboard/dashboard');
+    })->middleware(['auth', 'verified'])->name('dashboard');
+
+    Route::middleware('auth')->group(function () {
     // user profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -46,13 +54,6 @@ Route::middleware('auth')->group(function () {
 
 
 
-
-
-
-    //Artisan Commands for help in Cpanel
-    
-Route::get('/artisan-commands', [ArtisanCommandController::class, 'index'])->name('artisan.index');
-Route::post('/artisan-commands/run', [ArtisanCommandController::class, 'run'])->name('artisan.run');
 
 });
 
