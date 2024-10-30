@@ -52,7 +52,7 @@
                         <a href="#service" class="nav-item nav-link">{{__('Services')}}</a>
                         <a href="#contact" class="nav-item nav-link">{{__('Contact')}}</a>
                     </div>
-                    <a href="" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">{{__('Book Now!')}}<i class="fa fa-arrow-right ms-3"></i></a>
+                    <a href="#book_now" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">{{__('Book Now!')}}<i class="fa fa-arrow-right ms-3"></i></a>
                 </div>
             </nav>
         </div>

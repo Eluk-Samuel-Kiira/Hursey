@@ -5,11 +5,12 @@ use App\Http\Controllers\Settings\RolesController;
 use App\Http\Controllers\Settings\UserController;
 use App\Http\Controllers\Settings\CurrencyController;
 use App\Http\Controllers\Settings\SettingController;
+use App\Http\Controllers\Booking\BookingController;
+use App\Http\Controllers\ArtisanCommandController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome.home');
-});
+
+Route::get('/', [BookingController::class, 'welcomePage']);
 
 Route::get('/dashboard', function () {
     return view('dashboard/dashboard');
@@ -37,6 +38,21 @@ Route::middleware('auth')->group(function () {
     Route::post('/logo-upload', [SettingController::class, 'uploadLogo'])->name('logo.upload');
     Route::post('/favicon-upload', [SettingController::class, 'uploadFavicon'])->name('favicon.upload');
     Route::resource('currency', CurrencyController::class);
+
+    // Booking
+    Route::resource('booking', BookingController::class);
+    Route::put('/update-aboutus', [BookingController::class, 'updateAboutUs'])->name('aboutus.update');
+
+
+
+
+
+
+
+    //Artisan Commands for help in Cpanel
+    
+Route::get('/artisan-commands', [ArtisanCommandController::class, 'index'])->name('artisan.index');
+Route::post('/artisan-commands/run', [ArtisanCommandController::class, 'run'])->name('artisan.run');
 
 });
 

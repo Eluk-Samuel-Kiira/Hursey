@@ -13,7 +13,7 @@
                                 <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">{{__('Luxury Accommodation')}}</h6>
                                 <h5 class="display-5 text-white mb-4 animated slideInDown">{{__('Unwind in our breath-taking rooms...')}}</h5>
                                 <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">{{__('Our Rooms')}}</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">{{__('Book A Room')}}</a>
+                                <a href="#book_now" class="btn btn-light py-md-3 px-md-5 animated slideInRight">{{__('Book A Room')}}</a>
                             </div>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                             <div class="p-3" style="max-width: 700px;">
                                 <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">{{__('Wine & Dine')}}</h6>
                                 <h5 class="display-5 text-white mb-4 animated slideInDown">{{__('Savor exquiste dishes & drinks prepared by the best...')}}</h5> 
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">{{__('Book Reservation')}}</a>
+                                <a href="#book_now" class="btn btn-light py-md-3 px-md-5 animated slideInRight">{{__('Make A Reservation')}}</a>
                             </div>
                         </div>
                     </div>
@@ -31,57 +31,89 @@
                 <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
+                    <span class="visually-hidden">{{__('Previous')}}</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
                     data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
+                    <span class="visually-hidden">{{__('Next')}}</span>
                 </button>
             </div>
         </div>
         <!-- Carousel End -->
 
         <!-- Booking Start -->
-        <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div id="book_now" class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container">
                 <div class="bg-white shadow" style="padding: 35px;">
-                    <div class="row g-2">
+                    <div id="status"></div>
+                    <form id="bookingForm" class="row g-2">
+                        @csrf
                         <div class="col-md-10">
                             <div class="row g-2">
                                 <div class="col-md-3">
-                                    <div class="date" id="date1" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input"
+                                    <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Customer Name"  />
+                                    <div id="customer_name"></div>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="number" class="form-control" name="customer_number" id="customer_number" placeholder="Telephone"  />
+                                    <div id="customer_number"></div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="date" id="date1" name="check_in" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input" name="check_in" id="check_in"
                                             placeholder="Check in" data-target="#date1" data-toggle="datetimepicker" />
                                     </div>
+                                    <div id="check_in"></div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="date" id="date2" data-target-input="nearest">
-                                        <input type="text" class="form-control datetimepicker-input" placeholder="Check out" data-target="#date2" data-toggle="datetimepicker"/>
+                                        <input type="text" name="check_out"  id="check_out" class="form-control datetimepicker-input" placeholder="Check out" data-target="#date2" data-toggle="datetimepicker"/>
                                     </div>
+                                    <div id="check_out"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="row g-2">
+                                <div class="col-md-3">
+                                    <input type="number" class="form-control" name="guest_number" id="guest_number" placeholder="Number of Guest"  />
+                                    <div id="guest_number"></div>
                                 </div>
                                 <div class="col-md-3">
-                                    <select class="form-select">
-                                        <option selected>Adult</option>
-                                        <option value="1">Adult 1</option>
-                                        <option value="2">Adult 2</option>
-                                        <option value="3">Adult 3</option>
-                                    </select>
+                                    <input type="text" class="form-control" name="coming_from" id="coming_from" placeholder="Coming From"  />
+                                    <div id="coming_from"></div>
                                 </div>
-                                <div class="col-md-3">
-                                    <select class="form-select">
-                                        <option selected>Child</option>
-                                        <option value="1">Child 1</option>
-                                        <option value="2">Child 2</option>
-                                        <option value="3">Child 3</option>
-                                    </select>
+                                <div class="col-md-6">
+                                    <textarea name="special_requests" class="form-control">Special Requests</textarea>
+                                    <div id="special_requests"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <button class="btn btn-primary w-100">Submit</button>
                         </div>
-                    </div>
+                    </form>
+                    <script>
+                        window.routes = {
+                            'booking.store': "{{ route('booking.store') }}",
+                        };
+                
+                        const handleFormSubmit = (formId, routeName, method, componentToReload) => {
+                            document.getElementById(formId).addEventListener('submit', function(e) {
+                                e.preventDefault();
+                                
+                                const formData = Object.fromEntries(new FormData(this));
+                                // formData._token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                                // console.log(formData);
+
+                                LiveBlade.load(routeName, method, formData, `#${formId}`, componentToReload);
+                                // this.reset(); 
+                            });
+                        };
+                
+                        handleFormSubmit('bookingForm', 'booking.store', 'POST', '');
+                    </script>
                 </div>
             </div>
         </div>
@@ -93,14 +125,14 @@
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
                         <h6 class="section-title text-start text-primary text-uppercase">About Us</h6>
-                        <h1 class="mb-4">Welcome to <span class="text-primary text-uppercase">Hotelier</span></h1>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                        <h1 class="mb-4">{{ $about_us->title }}</h1>
+                        <p class="mb-4">{{ $about_us->about_text }}</p>
                         <div class="row g-3 pb-4">
                             <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-hotel fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">1234</h2>
+                                        <h2 class="mb-1" data-toggle="counter-up">{{ $about_us->no_room }}</h2>
                                         <p class="mb-0">Rooms</p>
                                     </div>
                                 </div>
@@ -109,7 +141,7 @@
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-users-cog fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">1234</h2>
+                                        <h2 class="mb-1" data-toggle="counter-up">{{ $about_us->no_staff }}</h2>
                                         <p class="mb-0">Staffs</p>
                                     </div>
                                 </div>
@@ -118,13 +150,13 @@
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-users fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">1234</h2>
+                                        <h2 class="mb-1" data-toggle="counter-up">{{ $about_us->no_clients }}</h2>
                                         <p class="mb-0">Clients</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary py-3 px-5 mt-2" href="">Explore More</a>
+                        <a class="btn btn-primary py-3 px-5 mt-2" href="#room">Explore More</a>
                     </div>
                     <div class="col-lg-6">
                         <div class="row g-3">

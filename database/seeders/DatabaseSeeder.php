@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserRole::class,
             SMTPSeeder::class,
+            AboutSeeder::class,
         ]);
     }
 }

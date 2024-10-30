@@ -5,12 +5,26 @@
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
-            <li class="nav-item">
+        <li class="nav-item">
                 <a class="nav-link {{ is_collapsed_route('dashboard') }}" href="{{ route('dashboard') }}">
                 <i class="bi bi-grid"></i>
                 <span>{{__('auth._dashboard')}}</span>
                 </a>
-            </li><!-- End Dashboard Nav -->
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ is_collapsed_route('booking.index') }}" href="{{ route('booking.index') }}">
+                <i class="bi bi-gift"></i>
+                <span>{{__('Bookings')}}</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ is_collapsed_route('booking.create') }}" href="{{ route('booking.create') }}">
+                <i class="bi bi-info-square"></i>
+                <span>{{__('About Us')}}</span>
+                </a>
+            </li>
 
             <li class="nav-heading">{{__('roles.user_management')}}</li>  
             {{-- roles permission      --}}

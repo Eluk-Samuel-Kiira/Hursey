@@ -7,6 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon -->
     <link href="{{ getFaviconImage() }}" rel="icon">
@@ -31,6 +32,8 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('hotelier/css/style.css') }}" rel="stylesheet">
 </head>
+{{-- laravel bladeLive.js library --}}
+@include('layouts.liveblade-imports')
 
 <body>
     <div class="container-xxl bg-white p-0">
