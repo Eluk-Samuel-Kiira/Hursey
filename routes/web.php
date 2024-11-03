@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 
 
 
+    Route::post('/contact-message', [ServiceController::class, 'storeMessage'])->name('store.message');
+    Route::post('/newsletter/subscribe', [ServiceController::class, 'subscribe'])->name('newsletter.subscribe');
 
     //Artisan Commands for help in Cpanel
     
@@ -60,8 +62,6 @@ use Illuminate\Support\Facades\Route;
     // Rooms
     Route::resource('room', RoomsController::class);
     Route::resource('service', ServiceController::class);
-    Route::post('/contact-message', [ServiceController::class, 'storeMessage'])->name('store.message');
-    Route::post('/newsletter/subscribe', [ServiceController::class, 'subscribe'])->name('newsletter.subscribe');
     Route::get('/message-index', [ServiceController::class, 'messages'])->name('message.index');
     Route::delete('/message/{id}', [ServiceController::class, 'destroyMessage'])->name('message.destroy');
 
