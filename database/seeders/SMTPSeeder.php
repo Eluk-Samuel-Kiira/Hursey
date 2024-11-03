@@ -15,7 +15,9 @@ class SMTPSeeder extends Seeder
     {
         
         Setting::create([
-            'app_name' => 'Boutika',
+            'app_name' => 'Hursey',
+            'app_email' => 'info@hursey.co.ug',
+            'app_contact' => '(+256) (0)392001682, +256 776104364',
         ]);
         
     }

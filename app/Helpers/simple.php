@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Setting;
+use App\Models\Currency;
 
 
 if (! function_exists('is_collapsed_route')) {

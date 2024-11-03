@@ -87,4 +87,5 @@ return [
     'image_uploaded' => 'Image uploaded successfully.',
     'image_uploaded_error' => 'Error uploading image:',
     'profile_details' => 'Profile Details',
+    'fill_form' => 'Please fill this input',
 ];

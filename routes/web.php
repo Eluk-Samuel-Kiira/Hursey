@@ -6,6 +6,7 @@ use App\Http\Controllers\Settings\UserController;
 use App\Http\Controllers\Settings\CurrencyController;
 use App\Http\Controllers\Settings\SettingController;
 use App\Http\Controllers\Booking\BookingController;
+use App\Http\Controllers\Booking\RoomsController;
 use App\Http\Controllers\ArtisanCommandController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +21,8 @@ use Illuminate\Support\Facades\Route;
         
     Route::get('/', [BookingController::class, 'welcomePage']);
 
-    Route::get('/dashboard', function () {
-        return view('dashboard/dashboard');
-    })->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/dashboard', [BookingController::class, 'index'])
+        ->middleware(['auth', 'verified'])->name('dashboard');
 
     Route::middleware('auth')->group(function () {
     // user profile
@@ -50,9 +50,14 @@ use Illuminate\Support\Facades\Route;
     // Booking
     Route::resource('booking', BookingController::class);
     Route::put('/update-aboutus', [BookingController::class, 'updateAboutUs'])->name('aboutus.update');
+    Route::get('/gallery-upload', [BookingController::class, 'uploadIndex'])->name('upload.gallery');
+    Route::post('/upload-image', [BookingController::class, 'storeImage'])->name('store.gallery');
+    Route::delete('/galleries/{id}', [BookingController::class, 'destroyGallery'])->name('galleries.destroy');
+    Route::post('/galleries/{id}/toggle-about-status', [BookingController::class, 'toggleAboutStatus'])->name('galleries.toggleAboutStatus');
 
 
-
+    // Rooms
+    Route::resource('room', RoomsController::class);
 
 
 });

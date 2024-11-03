@@ -26,6 +26,20 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link {{ is_collapsed_route('upload.gallery') }}" href="{{ route('upload.gallery') }}">
+                <i class="bi bi-camera-fill"></i>
+                <span>{{__('Gallery')}}</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ is_collapsed_route('room.index') }}" href="{{ route('room.index') }}">
+                <i class="bi bi-building"></i>
+                <span>{{__('Rooms')}}</span>
+                </a>
+            </li>
+
             <li class="nav-heading">{{__('roles.user_management')}}</li>  
             {{-- roles permission      --}}
             <li class="nav-item">

@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\About;
+use App\Models\Room;
 use Carbon\Carbon;
+use App\Models\Gallery;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class BookingController extends Controller
 {
@@ -168,7 +172,7 @@ class BookingController extends Controller
 
     public function updateAboutUs(Request $request) 
     {
-        \Log::info($request);
+        // \Log::info($request);
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'no_clients' => 'required|integer',
@@ -192,9 +196,78 @@ class BookingController extends Controller
 
     public function welcomePage() 
     {
+        $about_photo = Gallery::where('about_status', 'active')->latest()->take(4)->get();
+        $rooms = Room::latest()->get();
         $about_us = About::find(1);
         return view('welcome.home', [
             'about_us' => $about_us,
+            'about_photo' => $about_photo,
+            'rooms' => $rooms,
         ]);
     }
+
+    public function uploadIndex(Request $request) 
+    {
+        $galleries = Gallery::latest()->get();
+        $viewBlade = $request->query('viewBlade');
+
+        return view('gallery.gallery-index', [
+            'galleries' => $galleries,
+        ]);
+    }
+
+    public function storeImage(Request $request) 
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust max size if needed
+        ]);
+    
+        // Store the uploaded image in the 'public/images' directory
+        $imagePath = $request->file('image')->store('images', 'public');
+    
+        // Save name and image path to the database
+        $gallery = new Gallery();
+        $gallery->name = $validatedData['name'] . '_' . Str::random(5);
+        $gallery->image = $imagePath;
+        $gallery->save();
+
+        return response()->json([
+            'success' => true,
+            'reload' => true,
+            'message' => __('Image Saved to gallery successfully'),
+        ]);
+    }
+
+    public function dashboardIndex()
+    {
+        return view('dashboard.dashboard');
+    }
+
+
+    public function destroyGallery($id)
+    {
+        $gallery = Gallery::findOrFail($id);
+
+        $imagePath = $gallery->image;
+        if (Storage::disk('public')->exists($imagePath)) {
+            Storage::disk('public')->delete($imagePath);
+        }
+        $gallery->delete();
+
+        return redirect()->back()->with('message', 'Image removed successfully!');
+    }
+
+    public function toggleAboutStatus($id)
+    {
+        $gallery = Gallery::findOrFail($id);
+
+        // Toggle the status
+        $gallery->about_status = $gallery->about_status === 'active' ? 'inactive' : 'active';
+        $gallery->save();
+
+        return redirect()->back()->with('message', 'About page status updated successfully!');
+    }
+
+
 }
