@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\Models\Gallery;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Models\Service;
 
 class BookingController extends Controller
 {
@@ -198,11 +199,13 @@ class BookingController extends Controller
     {
         $about_photo = Gallery::where('about_status', 'active')->latest()->take(4)->get();
         $rooms = Room::latest()->get();
+        $services = Service::latest()->where('status', 'active')->get();
         $about_us = About::find(1);
         return view('welcome.home', [
             'about_us' => $about_us,
             'about_photo' => $about_photo,
             'rooms' => $rooms,
+            'services' => $services,
         ]);
     }
 

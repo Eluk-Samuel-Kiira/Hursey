@@ -1,6 +1,6 @@
 <x-app-layout>
-    @section('title', __('Rooms Index'))
-    @section('page', __('Rooms Index'))
+    @section('title', __('Service Index'))
+    @section('page', __('Service Index'))
     @section('content') 
     <section class="section">
         <div class="row">
@@ -8,20 +8,20 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <h5 class="card-title">{{__('Hursey Rooms')}}</h5>
-                            <!-- New User Button -->
-                            <button type="button" class="btn btn-outline-secondary ms-auto" data-bs-toggle="modal" data-bs-target="#createNewRoom">
-                                {{ __('Create Room') }}
-                            </button>
+                            <h5 class="card-title">{{__('Hursey Services')}}</h5>
                         </div>
                         <div class="col-3 ms-auto">
                             <input type="text" id="searchInput" class="form-control" placeholder="Search...">
                         </div>
                         {{-- display status message --}}
-                        <div id="status"></div>
+                        <div id="status"></div> 
+                        @if (session('status'))
+                            <div class="alert alert-info">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                         <hr>
-                        @include('rooms.rooms-component')
-                        @include('rooms.create-rooms')
+                        @include('services.message-comp')
                     </div>
                 </div>
             </div>

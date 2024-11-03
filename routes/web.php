@@ -6,6 +6,7 @@ use App\Http\Controllers\Settings\UserController;
 use App\Http\Controllers\Settings\CurrencyController;
 use App\Http\Controllers\Settings\SettingController;
 use App\Http\Controllers\Booking\BookingController;
+use App\Http\Controllers\Booking\ServiceController;
 use App\Http\Controllers\Booking\RoomsController;
 use App\Http\Controllers\ArtisanCommandController;
 use Illuminate\Support\Facades\Route;
@@ -58,7 +59,11 @@ use Illuminate\Support\Facades\Route;
 
     // Rooms
     Route::resource('room', RoomsController::class);
-
+    Route::resource('service', ServiceController::class);
+    Route::post('/contact-message', [ServiceController::class, 'storeMessage'])->name('store.message');
+    Route::post('/newsletter/subscribe', [ServiceController::class, 'subscribe'])->name('newsletter.subscribe');
+    Route::get('/message-index', [ServiceController::class, 'messages'])->name('message.index');
+    Route::delete('/message/{id}', [ServiceController::class, 'destroyMessage'])->name('message.destroy');
 
 });
 

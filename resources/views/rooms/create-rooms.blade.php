@@ -62,7 +62,7 @@
                             <label for="yourName" class="form-label">{{__('Room Description')}}</label>
                             <textarea class="form-control" name="narration" id="narration"></textarea>
                             <div class="invalid-feedback">{{__('auth.fill_form')}}</div>
-                            <div id="name"></div>
+                            <div id="narration"></div>
                         </div>
 
                     </div>

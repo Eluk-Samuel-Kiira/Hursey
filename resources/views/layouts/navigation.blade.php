@@ -40,6 +40,20 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link {{ is_collapsed_route('service.index') }}" href="{{ route('service.index') }}">
+                <i class="bi bi-collection"></i>
+                <span>{{__('Services')}}</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ is_collapsed_route('message.index') }}" href="{{ route('message.index') }}">
+                <i class="bi bi-messenger"></i>
+                <span>{{__('Messages/Inquiry')}}</span>
+                </a>
+            </li>
+
             <li class="nav-heading">{{__('roles.user_management')}}</li>  
             {{-- roles permission      --}}
             <li class="nav-item">
