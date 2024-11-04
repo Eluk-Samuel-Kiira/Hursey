@@ -2,9 +2,12 @@
 <div class="container-fluid bg-dark px-0">
     <div class="row gx-0">
         <div class="col-lg-3 bg-dark d-none d-lg-block">
-            <a href="/" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
-                <img src="{{ getLogoImage() }}" alt="" style="width: 32px; height: auto; margin-right: 10px;">
-                <h1 class="m-0 text-primary text-uppercase">{{ getMailOptions('app_name') }}</h1>
+            <a href="/" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center flex-column">
+                <div class="d-flex align-items-center">
+                    <img src="{{ getLogoImage() }}" alt="" style="width: 32px; height: auto; margin-right: 10px;">
+                    <h1 class="m-0 text-primary text-uppercase" style="white-space: nowrap;">{{ getMailOptions('app_name') }}</h1>
+                </div>
+                <h2 class="m-0 text-primary text-uppercase" style="font-size: 1.25rem;">Resort Hotel</h2>
             </a>
         </div>
         <div class="col-lg-9">
@@ -19,6 +22,7 @@
                         <p class="mb-0">{{ getMailOptions('app_contact') }}</p>
                     </div>
                 </div>
+                {{--
                 <div class="col-lg-5 px-5 text-end">
                     <div class="d-inline-flex align-items-center py-2">
                         <a class="me-3" href=""><i class="fab fa-facebook-f"></i></a>
@@ -28,6 +32,7 @@
                         <a class="" href=""><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
+                --}}
             </div>
             <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
                 <a href="/" class="navbar-brand d-block d-lg-none">

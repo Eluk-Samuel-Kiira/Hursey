@@ -27,17 +27,17 @@
                 <div class="row gy-5 g-4">
                     <div class="col-md-6">
                         <h6 class="section-title text-start text-primary text-uppercase mb-4">{{__('Company')}}</h6>
-                        <a class="btn btn-link" href="">{{__('About Us')}}</a>
+                        <a class="btn btn-link" href="#about">{{__('About Us')}}</a>
                         <a class="btn btn-link" href="">{{__('Contact Us')}}</a>
                         <a class="btn btn-link" href="">{{__('Terms & Condition')}}</a>
                         <a class="btn btn-link" href="">{{__('Support')}}</a>
                     </div>
                     <div class="col-md-6">
                         <h6 class="section-title text-start text-primary text-uppercase mb-4">Services</h6>
-                        <a class="btn btn-link" href="">{{__('Bar & Restaurant')}}</a>
-                        <a class="btn btn-link" href="">{{__('Conference & Workshop')}}</a>
-                        <a class="btn btn-link" href="">{{__('Sports & Gaming')}}</a>
-                        <a class="btn btn-link" href="">{{__('Event & Party')}}</a>
+                        <a class="btn btn-link" href="//">{{__('Bar & Restaurant')}}</a>
+                        <a class="btn btn-link" href="//">{{__('Conference & Workshop')}}</a>
+                        <a class="btn btn-link" href="//">{{__('Sports & Gaming')}}</a>
+                        <a class="btn btn-link" href="//">{{__('Event & Party')}}</a>
                     </div>
                 </div>
             </div>

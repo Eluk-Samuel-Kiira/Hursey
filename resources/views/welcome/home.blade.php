@@ -137,8 +137,8 @@
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-hotel fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">{{ $about_us->no_room }}</h2>
-                                        <p class="mb-0">Rooms</p>
+                                        <!-- <h2 class="mb-1" data-toggle="counter-up">{{ $about_us->no_room }}</h2> -->
+                                        <p class="mb-0">Luxurus Rooms</p>
                                     </div>
                                 </div>
                             </div>
@@ -146,8 +146,8 @@
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-users-cog fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">{{ $about_us->no_staff }}</h2>
-                                        <p class="mb-0">Staffs</p>
+                                        <!-- <h2 class="mb-1" data-toggle="counter-up">{{ $about_us->no_staff }}</h2> -->
+                                        <p class="mb-0">Committed Staffs</p>
                                     </div>
                                 </div>
                             </div>
@@ -155,8 +155,8 @@
                                 <div class="border rounded p-1">
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-users fa-2x text-primary mb-2"></i>
-                                        <h2 class="mb-1" data-toggle="counter-up">{{ $about_us->no_clients }}</h2>
-                                        <p class="mb-0">Clients</p>
+                                        <!-- <h2 class="mb-1" data-toggle="counter-up">{{ $about_us->no_clients }}</h2> -->
+                                        <p class="mb-0">Friendly Environment</p>
                                     </div>
                                 </div>
                             </div>
@@ -250,7 +250,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="video">
-                        <button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
+                        <button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://youtu.be/PSsLob5qxmQ" data-bs-target="#videoModal">
                             <span></span>
                         </button>
                     </div>
@@ -268,7 +268,7 @@
                     <div class="modal-body">
                         <!-- 16:9 aspect ratio -->
                         <div class="ratio ratio-16x9">
-                            <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always"
+                            <iframe class="embed-responsive-item" src="https://youtu.be/PSsLob5qxmQ" id="video" allowfullscreen allowscriptaccess="always"
                                 allow="autoplay"></iframe>
                         </div>
                     </div>
