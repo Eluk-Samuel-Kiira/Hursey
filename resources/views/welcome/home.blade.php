@@ -236,7 +236,7 @@
         </div>
         <!-- Room End -->
 
-        <!-- Video Start -->
+        <!-- Video Section Start -->
         <div class="container-xxl py-5 px-0 wow zoomIn" data-wow-delay="0.1s">
             <div class="row g-0">
                 <div class="col-md-6 bg-dark d-flex align-items-center">
@@ -249,8 +249,8 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="video">
-                        <button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://youtu.be/PSsLob5qxmQ" data-bs-target="#videoModal">
+                    <div class="video position-relative">
+                        <button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/PSsLob5qxmQ" data-bs-target="#videoModal">
                             <span></span>
                         </button>
                     </div>
@@ -258,24 +258,45 @@
             </div>
         </div>
 
-        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+        <!-- Video Modal -->
+        <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content rounded-0">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
+                        <h5 class="modal-title" id="videoModalLabel">Youtube Video</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <!-- 16:9 aspect ratio -->
                         <div class="ratio ratio-16x9">
-                            <iframe class="embed-responsive-item" src="https://youtu.be/PSsLob5qxmQ" id="video" allowfullscreen allowscriptaccess="always"
-                                allow="autoplay"></iframe>
+                            <iframe id="video" class="embed-responsive-item" src="" allowfullscreen allowscriptaccess="always" allow="autoplay"></iframe>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Video Start -->
+        <!-- Video Section End -->
+
+        <script>
+            // JavaScript to handle video modal behavior
+            document.addEventListener('DOMContentLoaded', function () {
+                const videoModal = document.getElementById('videoModal');
+                const videoIframe = document.getElementById('video');
+
+                // Trigger the video play on button click
+                videoModal.addEventListener('show.bs.modal', function (event) {
+                    const button = event.relatedTarget;
+                    const videoSrc = button.getAttribute('data-src');
+                    videoIframe.src = videoSrc + "?autoplay=1";  // Autoplay the video
+                });
+
+                // Stop the video when modal is closed
+                videoModal.addEventListener('hide.bs.modal', function () {
+                    videoIframe.src = "";  // Clear the src to stop the video
+                });
+            });
+        </script>
+
 
         <!-- Service Start -->
         <div class="container-xxl py-5" id="service">
