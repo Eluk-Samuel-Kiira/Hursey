@@ -313,7 +313,6 @@
                                     <img class="img-fluid" 
                                         src="{{ isset($service->service_icon) ? asset('storage/' . $service->serviceImagae->image) : asset('hotelier/img/room-1.jpg') }}" 
                                         alt="Room Image">                                    
-                                    <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">{{ appDefaultCurrency() }} {{ $room->price }}/Night</small>
                                 </div>
                                 <div class="p-4 mt-2">
                                     <div class="d-flex justify-content-between mb-3">
@@ -327,10 +326,7 @@
                                         </div>
                                     </div>
                                     <p class="text-body mb-3">{{ $service->narration }}</p>
-                                    <div class="d-flex justify-content-between">
-                                        {{--<a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a> --}}
-                                        <a class="btn btn-sm btn-dark rounded py-2 px-4" href="#book_now">Book Now</a>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
