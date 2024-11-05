@@ -254,6 +254,20 @@
                             <span></span>
                         </button>
                     </div>
+                    <style>
+                        .btn-play {
+                            background-image: url("{{ asset('hotelier/images/IMG-20231123-WA0105-1024x682.jpg') }}");
+                            background-size: cover;       /* Ensures the image covers the whole button */
+                            background-position: center;  /* Centers the background image */
+                            width: 100%;                  /* Set button width */
+                            height: 400px;                /* Set button height as needed */
+                            border: none;                 /* Removes default button border */
+                            cursor: pointer;              /* Sets cursor to pointer on hover */
+                            display: flex;                /* Allows positioning of inner content */
+                            align-items: center;          /* Centers content vertically */
+                            justify-content: center;      /* Centers content horizontally */
+                        }
+                    </style>
                 </div>
             </div>
         </div>
