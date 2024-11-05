@@ -17,17 +17,19 @@
                             <div class="invalid-feedback">{{__('auth.fill_form')}}</div>
                             <div id="name"></div>
                         </div>
-
                         <div class="col-md-6">
-                            <label for="iconSelect" class="form-label">Select Service Icon</label>
+                            <!-- Preview for selected image -->
+                            <div id="selectedImagePreview" class="mt-3">
+                                <img src="" alt="Selected Image" class="img-thumbnail" style="display: none; max-width: 150px;">
+                            </div>
+                            <label for="yourName" class="form-label">{{__('Select Room Image')}}</label>
                             <select class="form-select" id="iconSelect" name="service_icon">
-                                <option selected disabled>Select an icon</option>
-                                <option value="fa-hotel">Hotel</option>
-                                <option value="fa-utensils">Restaurant</option>
-                                <option value="fa-spa">Spa & Fitness</option>
-                                <option value="fa-swimmer">Sports & Gaming</option>
-                                <option value="fa-glass-cheers">Event & Party</option>
-                                <option value="fa-dumbbell">GYM & Yoga</option>
+                                <option selected disabled>Select an image</option>
+                                @foreach ($galleries as $gallery)
+                                    <option value="{{ $gallery->id }}" data-thumbnail="{{ asset('storage/' . $gallery->image) }}">
+                                        {{ $gallery->name }}
+                                    </option>
+                                @endforeach
                             </select>
                             <div id="service_icon"></div>
                         </div>
@@ -52,6 +54,21 @@
     </div>
 </div><!-- End Extra Large Modal-->
 
+<script>
+    // JavaScript to update image preview based on dropdown selection
+    document.getElementById('iconSelect').addEventListener('change', function() {
+        const selectedOption = this.options[this.selectedIndex];
+        const imageUrl = selectedOption.getAttribute('data-thumbnail');
+        const imagePreview = document.getElementById('selectedImagePreview').querySelector('img');
+
+        if (imageUrl) {
+            imagePreview.src = imageUrl;
+            imagePreview.style.display = 'block';
+        } else {
+            imagePreview.style.display = 'none';
+        }
+    });
+</script>
 
 <script>
     window.routes = {

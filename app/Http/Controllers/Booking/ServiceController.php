@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\Message;
 use App\Models\Email;
+use App\Models\Gallery;
 
 class ServiceController extends Controller
 {
@@ -16,16 +17,19 @@ class ServiceController extends Controller
     public function index(Request $request)
     {
         $services = Service::all();
+        $galleries = Gallery::latest()->get();
         
         $viewBlade = $request->query('viewBlade');
         switch ($viewBlade) {
             case 'serviceIndexTable':
                 return view('services.service-component', [
                     'services' => $services,
+                    'galleries' => $galleries,
                 ]);
             default:
                 return view('services.service-index', [
                     'services' => $services,
+                    'galleries' => $galleries,
                 ]);
         }
     }

@@ -18,17 +18,19 @@
                             <div id="name{{ $service->id }}"></div>
                         </div>
 
-                        
                         <div class="col-md-6">
-                            <label for="iconSelect" class="form-label">Select Service Icon</label>
-                            <select class="form-select" id="iconSelect{{ $service->id }}" name="service_icon">
-                                <option selected disabled>Select an icon</option>
-                                <option value="fa-hotel">Hotel</option>
-                                <option value="fa-utensils">Restaurant</option>
-                                <option value="fa-spa">Spa & Fitness</option>
-                                <option value="fa-swimmer">Sports & Gaming</option>
-                                <option value="fa-glass-cheers">Event & Party</option>
-                                <option value="fa-dumbbell">GYM & Yoga</option>
+                            <!-- Preview for selected image -->
+                            <div id="selectedImagePreview{{ $service->id }}" class="mt-3">
+                                <img src="" alt="Selected Image" class="img-thumbnail" style="display: none; max-width: 150px;">
+                            </div>
+                            <label for="galleryDropdown{{ $service->id }}" class="form-label">{{ __('Select Room Image') }}</label>
+                            <select class="form-select" id="galleryDropdown{{ $service->id }}" name="service_icon" onchange="showImagePreview({{ $service->id }}, this)">
+                                <option selected disabled>Select an image</option>
+                                @foreach ($galleries as $gallery)
+                                    <option value="{{ $gallery->id }}" data-thumbnail="{{ asset('storage/' . $gallery->image) }}">
+                                        {{ $gallery->name }}
+                                    </option>
+                                @endforeach
                             </select>
                             <div id="service_icon{{ $service->id }}"></div>
                         </div>
@@ -84,3 +86,25 @@
     }
 
 </script>
+
+
+<script>
+    function showImagePreview(roomId, selectElement) {
+        // Get the selected option
+        const selectedOption = selectElement.options[selectElement.selectedIndex];
+        const thumbnailUrl = selectedOption.getAttribute('data-thumbnail');
+
+        // Get the preview image element
+        const previewImage = document.querySelector(`#selectedImagePreview${roomId} img`);
+
+        // Update the preview image source and display it
+        if (thumbnailUrl) {
+            previewImage.src = thumbnailUrl; // Set the image source
+            previewImage.style.display = 'block'; // Make the image visible
+        } else {
+            previewImage.src = ''; // Clear the image source
+            previewImage.style.display = 'none'; // Hide the image if no selection
+        }
+    }
+</script>
+

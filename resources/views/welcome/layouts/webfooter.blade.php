@@ -6,6 +6,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="bg-primary rounded p-4">
                     <a href="/"><h1 class="text-white text-uppercase mb-3">{{ getMailOptions('app_name') }}</h1></a>
+                    <h2 class="text-white text-uppercase mb-3" style="font-size: 1.25rem;">Resort Hotel</h2>
                     <p class="text-dark mb-0">
                         {{__('Welcome to Hursey Resort, Soroti City- Your Oasis of Comfort and Luxury!')}}
                     </p>

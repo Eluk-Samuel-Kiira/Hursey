@@ -309,13 +309,18 @@
                     @foreach ($services as $service)
                         <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                             <a class="service-item rounded" href="">
-                                <div class="service-icon bg-transparent border rounded p-1">
-                                    <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
-                                        <i class="fa {{ $service->service_icon }} fa-2x text-primary"></i>
-                                    </div>
+                                <div class="position-relative">
+                                    <img class="img-fluid" 
+                                        src="{{ isset($service->service_icon) ? asset('storage/' . $service->serviceImagae->image) : asset('hotelier/img/room-1.jpg') }}" 
+                                        alt="Room Image">                                    
+                                    <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">{{ appDefaultCurrency() }} {{ $room->price }}/Night</small>
                                 </div>
-                                <h5 class="mb-3">{{ $service->name }}</h5>
-                                <p class="text-body mb-0">{{ $service->narration }}</p>
+                                <div class="p-4 mt-2">
+                                <div class="d-flex flex-column mb-3">
+                                    <h5 class="mb-0">{{ ucwords(str_replace('_', ' ', $service->name)) }}</h5>
+                                    <p class="text-body mb-3">{{ $service->narration }}</p>
+                                </div>
+                                </div>
                             </a>
                         </div>
                     @endforeach

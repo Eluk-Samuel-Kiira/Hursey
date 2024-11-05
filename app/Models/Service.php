@@ -14,4 +14,11 @@ class Service extends Model
         'narration',
         'status',
     ];
+
+
+    
+    public function serviceImagae() 
+    {
+        return $this->belongsTo(Gallery::class, 'service_icon', 'id');
+    }
 }
