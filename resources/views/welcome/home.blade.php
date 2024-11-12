@@ -128,7 +128,7 @@
         <div class="container-xxl py-5" id="about">
             <div class="container">
                 <div class="row g-5 align-items-center">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <h6 class="section-title text-start text-primary text-uppercase">About Us</h6>
                         <h1 class="mb-4">{{ $about_us->title }}</h1>
                         <p class="mb-4">{{ $about_us->about_text }}</p>
@@ -138,7 +138,7 @@
                                     <div class="border rounded text-center p-4">
                                         <i class="fa fa-hotel fa-2x text-primary mb-2"></i>
                                         <!-- <h2 class="mb-1" data-toggle="counter-up">{{ $about_us->no_room }}</h2> -->
-                                        <p class="mb-0">Luxurus Rooms</p>
+                                        <p class="mb-0">Luxurious Rooms</p>
                                     </div>
                                 </div>
                             </div>
@@ -163,6 +163,7 @@
                         </div>
                         <a class="btn btn-primary py-3 px-5 mt-2" href="#rooms">Explore More</a>
                     </div>
+                    {{--
                     <div class="col-lg-6">
                         <div class="row g-3">
                             <div class="col-6 text-end">
@@ -184,6 +185,7 @@
                             </div>
                         </div>
                     </div>
+                    --}}
                 </div>
             </div>
         </div>
@@ -239,7 +241,7 @@
         <!-- Video Section Start -->
         <div class="container-xxl py-5 px-0 wow zoomIn" data-wow-delay="0.1s">
             <div class="row g-0">
-                <div class="col-md-6 bg-dark d-flex align-items-center">
+                <div class="col-md-12 bg-dark d-flex align-items-center">
                     <div class="p-5">
                         <h6 class="section-title text-start text-white text-uppercase mb-3">Luxury Living</h6>
                         <h1 class="text-white mb-4">Discover A Brand Luxurious Hotel</h1>
@@ -248,6 +250,7 @@
                         <a href="#book_now" class="btn btn-light py-md-3 px-md-5">Book A Room</a>
                     </div>
                 </div>
+                {{--
                 <div class="col-md-6">
                     <div class="video position-relative">
                         <button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/PSsLob5qxmQ" data-bs-target="#videoModal">
@@ -269,6 +272,7 @@
                         }
                     </style>
                 </div>
+                --}}
             </div>
         </div>
 
