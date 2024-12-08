@@ -13,6 +13,7 @@
                             <i class="bi bi-trash"></i>
                         </button>
                     </form>
+
                     <form action="{{ route('galleries.toggleAboutStatus', $gallery->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('POST')
@@ -21,7 +22,13 @@
                             {{ $gallery->about_status === 'active' ? 'about-page' : 'none' }}
                         </button>
                     </form>
-
+                    <form action="{{ route('galleries.carousel', $gallery->id) }}" method="POST" style="display: inline;">
+                        @csrf
+                        <button type="submit" class="btn btn-primary btn-sm" title="Toggle carousel status" onclick="return confirm('Are you sure?');">
+                            <i class="bi bi-file-medical-fill"></i> 
+                            {{ DB::table('carousel')->where('gallery_id', $gallery->id)->exists() ? 'Remove from Carousel' : 'Add to Carousel' }}
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

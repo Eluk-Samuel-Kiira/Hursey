@@ -48,6 +48,13 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link {{ is_collapsed_route('testimony.index') }}" href="{{ route('testimony.index') }}">
+                <i class="bi bi-collection"></i>
+                <span>{{__('Testimony')}}</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link {{ is_collapsed_route('message.index') }}" href="{{ route('message.index') }}">
                 <i class="bi bi-messenger"></i>
                 <span>{{__('Messages/Inquiry')}}</span>

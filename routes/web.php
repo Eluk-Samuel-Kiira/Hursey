@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestimonyController;
 use App\Http\Controllers\Settings\RolesController;
 use App\Http\Controllers\Settings\UserController;
 use App\Http\Controllers\Settings\CurrencyController;
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
+    // testimony
+    Route::resource('testimony', TestimonyController::class);
 
     Route::post('/contact-message', [ServiceController::class, 'storeMessage'])->name('store.message');
     Route::post('/newsletter/subscribe', [ServiceController::class, 'subscribe'])->name('newsletter.subscribe');
@@ -57,6 +61,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('/upload-image', [BookingController::class, 'storeImage'])->name('store.gallery');
     Route::delete('/galleries/{id}', [BookingController::class, 'destroyGallery'])->name('galleries.destroy');
     Route::post('/galleries/{id}/toggle-about-status', [BookingController::class, 'toggleAboutStatus'])->name('galleries.toggleAboutStatus');
+    Route::post('/galleries/{id}/toggle-carousel-image', [BookingController::class, 'carouselToggle'])->name('galleries.carousel');
 
 
     // Rooms
@@ -65,6 +70,8 @@ use Illuminate\Support\Facades\Route;
     Route::get('/message-index', [ServiceController::class, 'messages'])->name('message.index');
     Route::delete('/message/{id}', [ServiceController::class, 'destroyMessage'])->name('message.destroy');
 
+
+    
 });
 
 require __DIR__.'/auth.php';

@@ -1,6 +1,7 @@
 @extends('welcome.layouts.webpage')
     @section('title', 'Welcome | Home')
-    @section('content')     
+    @section('content')    
+
         @if (session('status'))
             <div class="alert alert-info">
                 {{ session('status') }}
@@ -12,7 +13,9 @@
             <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="w-100" src="{{ asset('hotelier/images/IMG-20231123-WA0031-1024x682.jpg') }}" alt="Image"  style="width: 32px; height: 600px;">
+                        <img class="w-100" 
+                            src="{{ isset($carousel[0]) ? asset('storage/' . $carousel[0]->gallery_image) : asset('hotelier/images/IMG-20231123-WA0031-1024x682.jpg') }}" 
+                            alt="Image"  style="width: 32px; height: 600px;">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
                                 <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">{{__('Luxury Accommodation')}}</h6>
@@ -23,7 +26,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img class="w-100" src="{{ asset('hotelier/images/IMG-20231123-WA0001-1024x576.jpg') }}" alt="Image" style="width: 32px; height: 600px;">
+                        <img class="w-100" src="{{ isset($carousel[1]) ? asset('storage/' . $carousel[1]->gallery_image) : asset('hotelier/images/IMG-20231123-WA0001-1024x576.jpg') }}" alt="Image" style="width: 32px; height: 600px;">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
                                 <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">{{__('Wine & Dine')}}</h6>
@@ -295,25 +298,12 @@
         </div>
         <!-- Video Section End -->
 
-        <script>
-            // JavaScript to handle video modal behavior
-            document.addEventListener('DOMContentLoaded', function () {
-                const videoModal = document.getElementById('videoModal');
-                const videoIframe = document.getElementById('video');
-
-                // Trigger the video play on button click
-                videoModal.addEventListener('show.bs.modal', function (event) {
-                    const button = event.relatedTarget;
-                    const videoSrc = button.getAttribute('data-src');
-                    videoIframe.src = videoSrc + "?autoplay=1";  // Autoplay the video
-                });
-
-                // Stop the video when modal is closed
-                videoModal.addEventListener('hide.bs.modal', function () {
-                    videoIframe.src = "";  // Clear the src to stop the video
-                });
-            });
-        </script>
+        
+        <!-- Testimonial Start -->
+        <div id="testimonial" class="container-xxl testimonial mt-5 py-5 bg-dark wow zoomIn" data-wow-delay="0.1s" style="margin-bottom: 90px;">
+            @include('welcome.testimony')
+        </div>
+        <!-- Testimonial End -->
 
 
         <!-- Service Start -->

@@ -12,6 +12,8 @@ use App\Models\Gallery;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\Service;
+use App\Models\Testimony;
+use DB;
 
 class BookingController extends Controller
 {
@@ -200,12 +202,23 @@ class BookingController extends Controller
         $about_photo = Gallery::where('about_status', 'active')->latest()->take(4)->get();
         $rooms = Room::latest()->get();
         $services = Service::latest()->where('status', 'active')->get();
+        $testimonies = Testimony::where('status', 'active')->latest()->take(10)->get();
         $about_us = About::find(1);
+
+        $carousel = DB::table('carousel')
+                    ->join('galleries', 'carousel.gallery_id', '=', 'galleries.id')
+                    ->select('carousel.*', 'galleries.image as gallery_image')
+                    ->latest()  // Order by latest created_at
+                    ->take(2)   // Limit to the latest 2
+                    ->get();
+
         return view('welcome.home', [
             'about_us' => $about_us,
             'about_photo' => $about_photo,
             'rooms' => $rooms,
             'services' => $services,
+            'testimonies' => $testimonies,
+            'carousel' => $carousel,
         ]);
     }
 
@@ -270,6 +283,31 @@ class BookingController extends Controller
         $gallery->save();
 
         return redirect()->back()->with('message', 'About page status updated successfully!');
+    }
+
+
+    public function carouselToggle($id)
+    {
+        $gallery = Gallery::findOrFail($id); // Find the gallery or throw a 404 error
+
+        // Check if the gallery is already in the carousel
+        $carousel = DB::table('carousel')->where('gallery_id', $gallery->id)->first();
+
+        if ($carousel) {
+            // If it exists, remove it (toggle off)
+            DB::table('carousel')->where('gallery_id', $gallery->id)->delete();
+            $message = 'Carousel image removed successfully!';
+        } else {
+            // If it doesn't exist, add it (toggle on)
+            DB::table('carousel')->insert([
+                'gallery_id' => $gallery->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            $message = 'Carousel image added successfully!';
+        }
+
+        return redirect()->back()->with('message', $message);
     }
 
 
